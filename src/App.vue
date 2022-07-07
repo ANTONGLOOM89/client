@@ -4,6 +4,7 @@ Sidebar
 main
   .container
     router-view
+modal-send
 </template>
 
 <style lang="scss">
@@ -16,7 +17,8 @@ import { defineAsyncComponent } from 'vue'
 export default {
   components: {
     Header: defineAsyncComponent(() => import('@/components/layouts/Header')),
-    Sidebar: defineAsyncComponent(() => import('@/components/layouts/Sidebar'))
+    Sidebar: defineAsyncComponent(() => import('@/components/layouts/Sidebar')),
+    ModalSend: defineAsyncComponent(() => import('@/components/ModalSend'))
   }
 }
 

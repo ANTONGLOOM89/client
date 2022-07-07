@@ -17,17 +17,83 @@ body {
   background-color: #f5f5f5;
   font-size: 1.6rem;
   color: $primary;
+  font-family: 'Roboto-regular';
 }
 
 main {
-  padding-top: 10rem;
+  padding-top: 8rem;
   padding-left: $sidebar-width;
 }
 
 .container {
   padding-left: 10rem;
-  max-width: 70rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 0 5rem;
   margin-bottom: 8rem;
+}
+
+li {
+  list-style: none;
+}
+
+.btn {
+  transition: background-color .2s linear;
+  display: inline-block;
+  font-family: inherit;
+  vertical-align: top;
+  font-size: 1.4rem;
+  line-height: 1.1;
+  background: #0000ff;
+  border: none;
+  cursor: pointer;
+  padding: .8em 2em;
+  border-radius: 5px;
+  outline: none;
+  color: #fff;
+  &:hover {
+    background: #0000C5;
+  }
+}
+
+.form {
+  &__group {
+    position: relative;   
+  }
+  &__control {
+    width: 100%;
+    height: 30px;
+    padding: .5rem 0 .75rem;
+    overflow: hidden;
+    background: none;
+    border: none;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #3f3f3f;
+    font-family: inherit;
+    font-size: 1.4rem;
+    color: #fff;
+    resize: none;
+    outline:none;
+    &::placeholder {
+      color: rgba(#fff, .2);
+    }
+    &:focus + .form__line {
+      width: 100%;
+    }
+  }
+  &__line {
+    width: 0;
+    height: 1px;
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    transition: width .2s linear;
+  }
+  &__footer {
+    margin-top: 4rem;
+  }
 }
