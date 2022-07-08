@@ -24,7 +24,9 @@
 </template>
 
 <script setup>
-
+import { useStore } from 'vuex'
+const { state } = useStore()
+console.log(state.modal.personModal)
 </script>
 
 <style scoped lang="scss">

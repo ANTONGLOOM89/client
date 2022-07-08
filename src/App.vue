@@ -4,7 +4,7 @@ Sidebar
 main
   .container
     router-view
-modal-send
+//- modal-send
 </template>
 
 <style lang="scss">
