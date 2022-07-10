@@ -7,12 +7,13 @@ const getters = {
 }
 
 const mutations = {
-  setModalUser: (state, payload) => state.personModal = payload,
-  unsetModalUser: (state) => state.modalUser = undefined
+  setModalUser: (state, payload) => { state.modalUser = payload },
+  unsetModalUser: (state) => { state.modalUser = undefined }
 }
 
 const actions = {
   addModalUser({ commit }, payload) {
+    console.log(payload)
     commit('setModalUser', payload)
   },
   unsetModalUser({ commit } ) {
@@ -23,6 +24,7 @@ const actions = {
 export default {
   state,
   getters,
+  mutations,
   actions
 }
 

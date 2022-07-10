@@ -12,6 +12,7 @@
 import { ref } from 'vue'
 import { useNavigate } from '@/use/navigate'
 import { useStore } from 'vuex'
+import ModalSend from '@/components/ModalSend.vue'
 
 const users = ref([
   { id: 1 },
@@ -19,11 +20,8 @@ const users = ref([
 ])
 
 const { navigate } = useNavigate()
-const { store } = useStore()
-const addUser = () => {
-  console.log(store)
-  //state.modal.dispatch('addModalUser')
-}
+const store = useStore()
+const addUser = () => { store.dispatch('addModalUser', { component: ModalSend, props: {} }) }
 
 
 

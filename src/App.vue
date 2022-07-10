@@ -1,26 +1,24 @@
 <template lang="pug">
-Header
-Sidebar
+header
+sidebar
 main
   .container
     router-view
-//- modal-send
+  component(v-if="modal" :is="modal.component")
 </template>
 
 <style lang="scss">
 
 </style>
 
-<script>
-import { defineAsyncComponent } from 'vue'
+<script setup>
+import { useStore } from 'vuex'
+import Header  from '@/components/layouts/Header'
+import Sidebar from '@/components/layouts/Sidebar'
+import { computed } from '@vue/runtime-core'
 
-export default {
-  components: {
-    Header: defineAsyncComponent(() => import('@/components/layouts/Header')),
-    Sidebar: defineAsyncComponent(() => import('@/components/layouts/Sidebar')),
-    ModalSend: defineAsyncComponent(() => import('@/components/ModalSend'))
-  }
-}
+const store = useStore()
+const modal = computed(() => store.getters.getModalUser)
 
 </script>
 

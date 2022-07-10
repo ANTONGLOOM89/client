@@ -1,32 +1,62 @@
 <template lang="pug">
-.modal
-  .modal__content
-    .modal__header
-      .modal__title Создание пользователя
-      button.modal__close
-        img(src="@/assets/images/close.svg", alt="close")
+modal-base(
+  header="Создание пользователя"
+  @close="closeModal"
+  @saveForm="saveModal"
+  )
+  template(v-slot:content)
     form.form()
       .form__group
-        input.form__control(name="comment-text" type="text" placeholder="Ваше имя")
+        input.form__control(
+          name="comment-text" 
+          type="text" 
+          placeholder="Ваше Имя"
+          v-model="form.name"
+        )
         span.form__line
       .form__group
-        input.form__control(name="comment-text" type="text" placeholder="Ваше имя")
+        input.form__control(
+          name="comment-text" 
+          type="text" 
+          placeholder="Ваша Фамилия"
+          v-model="form.surname"
+        )
         span.form__line
       .form__group
-        input.form__control(name="comment-text" type="text" placeholder="Ваше имя")
+        input.form__control(
+          name="comment-text" 
+          type="text" 
+          placeholder="Ваша Должность"
+          v-model="form.position"
+        )
         span.form__line
       .form__group
-        input.form__control(name="comment-text" type="text" placeholder="Ваше имя")
+        input.form__control(
+          name="comment-text" 
+          type="text" 
+          placeholder="Ваш Контактный телефон"
+          v-model="form.phone"
+        )
         span.form__line
-      .form__footer
-        .form__group
-          .btn(type='submit') Сохранить
 </template>
 
 <script setup>
 import { useStore } from 'vuex'
-const { state } = useStore()
-console.log(state.modal.personModal)
+import { ref, reactive } from 'vue';
+import ModalBase from '@/components/ModalBase'
+
+const store = useStore()
+const closeModal = () => { store.dispatch('unsetModalUser')}
+const form = reactive({
+  name: '', 
+  surname: '',
+  position: '', 
+  phone: ''
+})
+const saveModal = () => { 
+  console.log(form)
+  closeModal()
+}
 </script>
 
 <style scoped lang="scss">
