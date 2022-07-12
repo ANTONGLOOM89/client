@@ -1,60 +1,80 @@
 <template lang="pug">
 modal-base(
   header="Создание пользователя"
+  :disabled="!form.valid"
   @close="closeModal"
   @saveForm="saveModal"
   )
   template(v-slot:content)
     form.form()
-      .form__group
+      .form__group(v-for="field in fields")
         input.form__control(
-          name="comment-text" 
-          type="text" 
-          placeholder="Ваше Имя"
-          v-model="form.name"
+          :type="form[field].type"
+          :placeholder="form[field].placeholder"
+          v-model="form[field].value"
+          @blur="form[field].blur"
         )
         span.form__line
-      .form__group
-        input.form__control(
-          name="comment-text" 
-          type="text" 
-          placeholder="Ваша Фамилия"
-          v-model="form.surname"
-        )
-        span.form__line
-      .form__group
-        input.form__control(
-          name="comment-text" 
-          type="text" 
-          placeholder="Ваша Должность"
-          v-model="form.position"
-        )
-        span.form__line
-      .form__group
-        input.form__control(
-          name="comment-text" 
-          type="text" 
-          placeholder="Ваш Контактный телефон"
-          v-model="form.phone"
-        )
-        span.form__line
+        span.form__error(v-show="!form[field].valid && form[field].touched")
+        span.form__info(v-if="form[field].errors.required && form[field].touched") Ввведите {{form[field].placeholder}}
+        span.form__info(v-else-if="form[field].errors.minLength && form[field].touched") Болшше 8 знаков, сейчас {{form[field].value.length}}
 </template>
 
 <script setup>
+
+const required = val => !!val
+const minLength = num => val => val.length >= num
+
 import { useStore } from 'vuex'
-import { ref, reactive } from 'vue';
 import ModalBase from '@/components/ModalBase'
+import { useForm } from '@/use/form'
 
 const store = useStore()
 const closeModal = () => { store.dispatch('unsetModalUser')}
-const form = reactive({
-  name: '', 
-  surname: '',
-  position: '', 
-  phone: ''
+const form = useForm({
+  name: {
+    value: "",
+    validators: {required},
+    type: 'text',
+    placeholder: 'ФИО'
+  },
+  position: {
+    value: "",
+    validators: {required},
+    type: 'text',
+    placeholder: 'Ваша Должность'
+  },
+  phone: {
+    value: "",
+    validators: {required},
+    type: 'text',
+    placeholder: 'Ваш Контактный телефон'
+  },
+  email: {
+    value: "",
+    validators: { required },
+    type: "text",
+    placeholder: "Email"
+  },
+  password: {
+    value: "",
+    validators: { required, minLength: minLength(8) },
+    type: "password",
+    placeholder: "Пароль"
+  }
 })
-const saveModal = () => { 
-  console.log(form)
+
+const fields = Object.keys(form).filter(item => item !== 'valid')
+
+const saveModal = () => {
+  const { name, position, phone, email, password } = form
+  console.log({
+    name: name.value,
+    position: position.value,
+    phone: phone.value,
+    email: email.value,
+    password: password.value
+  })
   closeModal()
 }
 </script>

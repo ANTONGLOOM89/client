@@ -54,6 +54,9 @@ li {
   &:hover {
     background: #0000C5;
   }
+  &__disabled {
+    background-color: #3f3f3f!important;
+  }
 }
 
 .form {
@@ -84,6 +87,17 @@ li {
       width: 100%;
     }
   }
+  &__error {
+    width: 0;
+    height: 1px;
+    background-color: red;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    transition: width .2s linear;
+    width: 100%;
+  }
   &__line {
     width: 0;
     height: 1px;
@@ -93,6 +107,12 @@ li {
     bottom: 0;
     z-index: 1;
     transition: width .2s linear;
+  }
+  &__info {
+    position: absolute;
+    bottom: -1.3rem;
+    color: red;
+    font-size: 1rem;
   }
   &__footer {
     margin-top: 4rem;

@@ -7,11 +7,15 @@
         img(src="@/assets/images/close.svg", alt="close")
     slot(name="content")
     .form__group
-      .btn(type='submit' @click="saveForm") Сохранить
+      .btn(
+        type='submit' 
+        @click="saveForm" 
+        :disabled="disabled"
+        :class="{ 'btn__disabled': disabled }") Сохранить
 </template>
 
 <script setup>
-const { header } = defineProps({ header: String })
+const { header } = defineProps({ header: String, disabled: Boolean })
 const emit = defineEmits(['close', 'saveForm'])
 const closeModal = () => { emit('close') }
 const saveForm = () => { emit('saveForm') }
