@@ -15,5 +15,14 @@ export const useField = (field) => {
     })
   }, { immediate:true })
 
-  return { value, valid, errors, touched, blur: () => touched.value = true, type: field.type, placeholder: field.placeholder }
+  return {
+    value,
+    valid, 
+    errors, 
+    touched, 
+    blur: () => touched.value = true, 
+    type: field.type, 
+    placeholder: field.placeholder,
+    tag: field.tag
+  }
 } 

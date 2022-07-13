@@ -9,11 +9,13 @@ modal-base(
     form.form()
       .form__group(v-for="field in fields")
         input.form__control(
+          v-if="form[field].tag === 'input'"
           :type="form[field].type"
           :placeholder="form[field].placeholder"
           v-model="form[field].value"
           @blur="form[field].blur"
         )
+        textarea(v-else rows="10" cols="45" name="text")
         span.form__line
         span.form__error(v-show="!form[field].valid && form[field].touched")
         span.form__info(v-if="form[field].errors.required && form[field].touched") Ввведите {{form[field].placeholder}}
@@ -36,44 +38,56 @@ const form = useForm({
     value: "",
     validators: {required},
     type: 'text',
-    placeholder: 'ФИО'
+    placeholder: 'ФИО',
+    tag:"input"
   },
   position: {
     value: "",
     validators: {required},
     type: 'text',
-    placeholder: 'Ваша Должность'
+    placeholder: 'Ваша Должность',
+    tag:"input"
   },
   phone: {
     value: "",
     validators: {required},
     type: 'text',
-    placeholder: 'Ваш Контактный телефон'
+    placeholder: 'Ваш Контактный телефон',
+    tag:"input"
   },
   email: {
     value: "",
     validators: { required },
     type: "text",
-    placeholder: "Email"
+    placeholder: "Email",
+    tag:"input"
   },
   password: {
     value: "",
     validators: { required, minLength: minLength(8) },
     type: "password",
-    placeholder: "Пароль"
+    placeholder: "Пароль",
+    tag:"input"
+  },
+  comment: {
+    value: "",
+    validators: { },
+    placeholder: "Комментарий",
+    tag:"textarea"
   }
 })
 
 const fields = Object.keys(form).filter(item => item !== 'valid')
 
 const saveModal = () => {
-  const { name, position, phone, email, password } = form
+  const { name, position, phone, email, password, comment } = form
   console.log({
     name: name.value,
     position: position.value,
     phone: phone.value,
     email: email.value,
-    password: password.value
+    password: password.value,
+    comment: comment.value
   })
   closeModal()
 }
